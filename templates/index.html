@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapRemove | Free & Easy Background Removal for Any Image</title>
+    <meta name="description" content="SnapRemove is a fast, free tool for removing image backgrounds online. Simply upload your photo and let our AI-powered tool instantly erase backgrounds, creating transparent images with ease!" />
+    <meta name="keywords" content="background remover, image background eraser, transparent image tool, online background remover, photo editor" />
+    <meta name="author" content="Layers Studio" />
+    <meta name="description" content="Effortlessly remove background from your images. Simple and effective image background removal tool.">
+    <meta name="keywords" content="remove background, image editor, photo editing, background removal">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* Background Animation */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(270deg, #007bff, #00d4ff, #007bff);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: rgba(0, 123, 255, 0.9);
+            color: white;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap; /* Allow items to wrap */
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #333;
+            background-color: #ffd700;
+        }
+
+        /* Main Heading and Tagline */
+        h1 {
+            margin-top: 40px;
+            color: white;
+            font-size: 2.5rem;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #ffd700;
+            margin: 10px 0 30px;
+            animation: fadeIn 2s ease;
+        }
+
+        /* Upload Form */
+        .upload-form {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            display: inline-block;
+            animation: fadeIn 2s ease;
+        }
+
+        .upload-form input[type="file"] {
+            display: none; /* Hide the default file input */
+        }
+
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 2px dashed #007bff;
+            border-radius: 5px;
+            background-color: #f8f9fa; /* Light background */
+            color: #007bff;
+            font-weight: bold;
+            transition: background-color 0.3s, border-color 0.3s;
+            font-size: 1rem; /* Increase font size */
+        }
+
+        .custom-file-upload:hover {
+            background-color: #e7f0ff; /* Change background on hover */
+            border-color: #0056b3; /* Darker border on hover */
+        }
+
+        .submit-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+            font-weight: 600;
+            font-size: 1rem; /* Increase font size */
+        }
+
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Image Preview */
+        .image-preview {
+            margin-top: 20px;
+            max-width: 100%; /* Responsive */
+            display: flex;
+            justify-content: center;
+        }
+
+        .image-preview img {
+            max-width: 100%; /* Responsive */
+            max-height: 300px; /* Limit height */
+            border: 2px solid #007bff;
+            border-radius: 5px;
+        }
+
+        /* How to Use Section */
+        .how-to-use {
+            margin: 50px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeIn 2s ease;
+        }
+
+        .how-to-use h2 {
+            margin-bottom: 20px;
+            color: #007bff;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(0, 123, 255, 0.9);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column; /* Stack links vertically */
+                align-items: center; /* Center align */
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .custom-file-upload,
+            .submit-button {
+                padding: 10px 15px; /* Consistent padding */
+                font-size: 0.9rem; /* Smaller font size on mobile */
+            }
+
+            .how-to-use {
+                margin: 30px 0;
+                padding: 15px; /* Adjust padding */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms">Terms and Conditions</a></li>
+        </ul>
+    </nav>
+
+    <h1>Remove Background from Your Images</h1>
+    <p class="tagline">Effortlessly enhance your images in seconds!</p>
+
+    <div class="upload-form">
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <label for="file-upload" class="custom-file-upload">
+                <i class="fas fa-cloud-upload-alt"></i> Choose Image
+            </label>
+            <input id="file-upload" type="file" name="file" accept="image/*" required onchange="previewImage(event)">
+            <br>
+            <input type="submit" value="Remove Background" class="submit-button">
+        </form>
+        <div id="image-preview" class="image-preview"></div>
+    </div>
+
+    <div class="how-to-use">
+        <h2>How to Use:</h2>
+        <p>1. Click on "Choose Image" to upload your image.</p>
+        <p>2. Click "Remove Background" to process your image.</p>
+        <p>3. Download your image with a transparent background.</p>
+    </div>
+
+    <footer class="footer">
+        &copy; 2024 YourWebsite. All rights reserved.
+    </footer>
+
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('image-preview');
+            preview.innerHTML = ''; // Clear previous preview
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result; // Set the image source to the file
+                    preview.appendChild(img); // Append the image to the preview div
+                }
+
+                reader.readAsDataURL(file); // Read the file as a data URL
+            }
+        }
+    </script>
+</body>
+</html>
